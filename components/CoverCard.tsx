@@ -6,13 +6,52 @@ const CoverCard: React.FC = () => {
   const siteUrl = "https://convite-lais-moreira.vercel.app/";
 
   return (
-    <div className="min-h-screen bg-[#050505] flex flex-col items-center justify-center p-0 md:p-8 overflow-y-auto">
+    <div className="min-h-screen bg-[#050505] flex flex-col items-center justify-center p-0 md:p-8 overflow-y-auto print:p-0 print:bg-black">
       
+      {/* 
+         CSS Específico para Impressão (PDF)
+         - Remove margens padrão
+         - Força o conteúdo a ocupar 100% da folha
+         - Ajusta cores de fundo
+      */}
+      <style>{`
+        @media print {
+            @page { margin: 0; size: auto; }
+            body { 
+                margin: 0; 
+                padding: 0; 
+                background-color: #0f0f0f !important;
+                -webkit-print-color-adjust: exact !important; 
+                print-color-adjust: exact !important; 
+            }
+            /* Esconde cabeçalho e rodapé padrão do navegador se aparecerem */
+            header, footer { display: none !important; }
+            
+            /* Força o card a preencher tudo */
+            #pdf-content {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                max-width: none !important;
+                aspect-ratio: auto !important;
+                border: none !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                margin: 0 !important;
+                z-index: 9999;
+            }
+        }
+      `}</style>
+
       {/* 
         Container PRINCIPAL (Onde vai virar o PDF/Imagem)
         Aspect Ratio 9:16 (Stories/Mobile Fullscreen)
       */}
-      <div id="pdf-content" className="relative w-full max-w-[400px] aspect-[9/16] bg-[#0f0f0f] shadow-[0_0_60px_rgba(212,175,55,0.1)] overflow-hidden flex flex-col border border-gray-800 md:rounded-2xl">
+      <div id="pdf-content" className="relative w-full max-w-[400px] aspect-[9/16] bg-[#0f0f0f] shadow-[0_0_60px_rgba(212,175,55,0.1)] overflow-hidden flex flex-col border border-gray-800 md:rounded-2xl print:border-none print:shadow-none print:rounded-none">
         
         {/* === PARTE SUPERIOR: FOTO (53% da altura - Reduzido para dar espaço ao texto) === */}
         <div className="relative h-[53%] w-full overflow-hidden group">
