@@ -1,6 +1,6 @@
 import React from 'react';
 import { IMAGES } from '../constants';
-import { Download, Share2, Stethoscope } from 'lucide-react';
+import { Download, Share2, Stethoscope, MousePointerClick } from 'lucide-react';
 
 const CoverCard: React.FC = () => {
   const siteUrl = "https://convite-lais-moreira.vercel.app/";
@@ -14,19 +14,16 @@ const CoverCard: React.FC = () => {
       */}
       <div id="pdf-content" className="relative w-full max-w-[400px] aspect-[9/16] bg-[#0f0f0f] shadow-[0_0_60px_rgba(212,175,55,0.1)] overflow-hidden flex flex-col border border-gray-800 md:rounded-2xl">
         
-        {/* === PARTE SUPERIOR: FOTO (62% da altura) === */}
-        <div className="relative h-[62%] w-full overflow-hidden group">
-            {/* Foto com Zoom suave ao passar o mouse (efeito apenas web) */}
+        {/* === PARTE SUPERIOR: FOTO (60% da altura) === */}
+        <div className="relative h-[60%] w-full overflow-hidden group">
             <img 
                 src={IMAGES.COVER_DISPLAY} 
                 alt="Dra Laís com Diploma" 
-                className="w-full h-full object-cover object-top transition-transform duration-1000 md:group-hover:scale-105"
+                className="w-full h-full object-cover object-top"
             />
             
-            {/* Gradiente Inferior para suavizar encontro com a barra dourada */}
-            <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black/80 to-transparent"></div>
+            <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black/90 to-transparent"></div>
 
-            {/* Logo sutil no topo */}
             <div className="absolute top-6 left-0 w-full flex justify-center opacity-90 drop-shadow-md">
                  <img src={IMAGES.LOGO} className="h-10 logo-white-filter" alt="Logo" />
             </div>
@@ -34,10 +31,9 @@ const CoverCard: React.FC = () => {
 
         {/* === DIVISÓRIA DOURADA & SELO === */}
         <div className="relative z-20">
-            {/* Linha Dourada com Brilho */}
             <div className="h-1.5 w-full bg-gradient-to-r from-gold-600 via-gold-300 to-gold-600 shadow-[0_0_15px_rgba(212,175,55,0.6)]"></div>
             
-            {/* O SELO (Botão de Ação) - Centralizado na linha */}
+            {/* O SELO (Botão de Ação) */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                 <a 
                     href={siteUrl}
@@ -45,17 +41,14 @@ const CoverCard: React.FC = () => {
                     rel="noopener noreferrer"
                     className="relative group flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-gold-300 via-gold-500 to-gold-700 shadow-[0_4px_20px_rgba(0,0,0,0.5)] border-2 border-gold-100 active:scale-95 transition-transform duration-300"
                 >
-                    {/* Efeito de "Cera" / Relevo */}
                     <div className="absolute inset-1 rounded-full border border-gold-600/50"></div>
                     <div className="absolute inset-0 rounded-full bg-[url('https://www.transparenttextures.com/patterns/concrete-wall.png')] opacity-30 mix-blend-multiply"></div>
                     
-                    {/* Ícone/Texto do Selo */}
                     <div className="flex flex-col items-center justify-center text-gold-900 drop-shadow-sm">
                         <Stethoscope size={24} strokeWidth={2.5} className="mb-0.5" />
                         <span className="text-[10px] font-bold uppercase tracking-widest">Abrir</span>
                     </div>
 
-                    {/* Brilho Animado no Selo */}
                     <div className="absolute inset-0 rounded-full overflow-hidden">
                         <div className="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-25deg] animate-[shimmer_2.5s_infinite]"></div>
                     </div>
@@ -63,34 +56,46 @@ const CoverCard: React.FC = () => {
             </div>
         </div>
 
-        {/* === PARTE INFERIOR: TEXTO (38% da altura) === */}
-        <div className="relative h-[38%] bg-[#121212] flex flex-col items-center justify-start px-6 pt-14 pb-4 text-center">
-            {/* Textura de fundo sutil */}
+        {/* === PARTE INFERIOR: TEXTO (40% da altura) === */}
+        <div className="relative h-[40%] bg-[#121212] flex flex-col px-6 pt-12 pb-8 text-center justify-between">
             <div className="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
             
-            <p className="font-sans text-gold-500/80 text-[10px] uppercase tracking-[0.4em] mb-2 z-10">
-                Convite Oficial
-            </p>
-
-            <h1 className="font-script text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-100 to-gold-300 drop-shadow-sm mb-4 py-1 leading-none z-10">
-                Dra. Laís Moreira
-            </h1>
-
-            <div className="flex items-center gap-3 mb-4 opacity-80 z-10">
-                <div className="w-8 h-[1px] bg-gold-600"></div>
-                <h2 className="font-serif text-white text-sm tracking-[0.2em] uppercase">
-                    Medicina • 2026
-                </h2>
-                <div className="w-8 h-[1px] bg-gold-600"></div>
+            {/* Aviso Explicito de Clique Logo Abaixo do Selo */}
+            <div className="relative z-10 -mt-2 mb-2 animate-pulse">
+                <p className="flex items-center justify-center gap-1 text-[10px] text-gold-400 font-bold uppercase tracking-widest">
+                    <MousePointerClick size={12} /> Clique no selo acima
+                </p>
             </div>
-            
-            <p className="font-serif text-gray-500 italic text-[10px] leading-relaxed max-w-[80%] mx-auto z-10">
-                "É com muita alegria que convido você para celebrar essa conquista comigo."
-            </p>
 
-            <p className="text-[9px] text-gray-600 uppercase tracking-widest mt-auto z-10">
-                Toque no selo para confirmar presença
-            </p>
+            {/* Bloco de Título */}
+            <div className="relative z-10 flex flex-col items-center justify-center flex-grow">
+                <p className="font-sans text-gold-500/60 text-[9px] uppercase tracking-[0.4em] mb-1">
+                    Convite Oficial
+                </p>
+
+                <h1 className="font-script text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-100 to-gold-300 drop-shadow-sm mb-2 leading-none">
+                    Dra. Laís Moreira
+                </h1>
+
+                <div className="flex items-center gap-3 mb-3 opacity-80">
+                    <div className="w-6 h-[1px] bg-gold-600"></div>
+                    <h2 className="font-serif text-white text-xs tracking-[0.2em] uppercase">
+                        Medicina • 2026
+                    </h2>
+                    <div className="w-6 h-[1px] bg-gold-600"></div>
+                </div>
+                
+                <p className="font-serif text-gray-500 italic text-[11px] leading-relaxed max-w-[90%] mx-auto">
+                    "É com muita alegria que convido você para celebrar essa conquista comigo."
+                </p>
+            </div>
+
+            {/* Rodapé com instrução final (Agora com margem segura) */}
+            <div className="relative z-10 mt-auto pt-4 border-t border-gray-800/50">
+                <p className="text-[10px] font-sans font-semibold text-gray-400 uppercase tracking-widest">
+                    Toque no selo dourado para acessar o site
+                </p>
+            </div>
         </div>
 
       </div>

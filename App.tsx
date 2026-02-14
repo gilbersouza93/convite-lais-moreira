@@ -75,7 +75,7 @@ const App: React.FC = () => {
         <header id="home" className="relative h-[250vh]">
           
           {/* Sticky Container */}
-          <div className="sticky top-0 h-screen flex flex-col items-center justify-start pt-28 md:justify-center md:pt-0 overflow-hidden bg-[#0a0a0a]">
+          <div className="sticky top-0 h-screen flex flex-col items-center justify-start pt-20 md:justify-center md:pt-0 overflow-hidden bg-[#0a0a0a]">
             
             {/* Background Effects */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -104,18 +104,18 @@ const App: React.FC = () => {
             {/* Main Content Text */}
             <motion.div 
               style={{ opacity: textOpacity, y: textY, scale: textScale }}
-              className="relative z-30 text-center text-white px-4 max-w-5xl mx-auto mb-auto md:mb-0 mt-12 md:mt-0"
+              className="relative z-30 text-center text-white px-4 max-w-5xl mx-auto mb-auto md:mb-0 mt-8 md:mt-0"
             >
-              <p className="font-sans text-sm md:text-lg tracking-[0.3em] uppercase mb-4 md:mb-6 text-gold-300 drop-shadow-lg font-medium">
+              <p className="font-sans text-xs md:text-lg tracking-[0.3em] uppercase mb-2 md:mb-6 text-gold-300 drop-shadow-lg font-medium">
                 Convite de Formatura
               </p>
-              <h1 className="font-serif text-5xl md:text-8xl lg:text-9xl font-bold mb-6 tracking-wide text-gold-gradient drop-shadow-2xl">
+              <h1 className="font-serif text-5xl md:text-8xl lg:text-9xl font-bold mb-4 md:mb-6 tracking-wide text-gold-gradient drop-shadow-2xl">
                 Laís Moreira
               </h1>
               
-              <div className="h-0.5 bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto my-6 md:my-8 w-32 md:w-48 opacity-80" />
+              <div className="h-0.5 bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto my-4 md:my-8 w-32 md:w-48 opacity-80" />
               
-              <h2 className="font-sans text-xl md:text-3xl tracking-[0.3em] font-light uppercase text-gray-100 drop-shadow-md flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
+              <h2 className="font-sans text-lg md:text-3xl tracking-[0.3em] font-light uppercase text-gray-100 drop-shadow-md flex flex-col md:flex-row items-center justify-center gap-1 md:gap-4">
                 <span>Medicina</span>
                 <span className="hidden md:inline text-gold-500">•</span>
                 <span className="text-gold-200 font-normal">2026</span>
@@ -134,7 +134,8 @@ const App: React.FC = () => {
                <img 
                  src={IMAGES.HERO_PORTRAIT} 
                  alt="Dra. Laís Moreira" 
-                 className="relative z-10 w-auto h-[65vh] md:h-[85vh] object-contain object-bottom max-w-none md:max-w-full drop-shadow-[0_10px_50px_rgba(0,0,0,0.9)]"
+                 // Aumentado h- de 65vh para 70vh no mobile para preencher o gap superior
+                 className="relative z-10 w-auto h-[70vh] md:h-[85vh] object-contain object-bottom max-w-none md:max-w-full drop-shadow-[0_10px_50px_rgba(0,0,0,0.9)]"
                />
             </motion.div>
 
@@ -144,13 +145,14 @@ const App: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 4, duration: 1 }}
-              className="absolute bottom-8 left-0 right-0 w-full flex justify-center z-40"
+              // Alterado de bottom-8 para bottom-24 (mobile) e bottom-8 (desktop)
+              className="absolute bottom-24 md:bottom-8 left-0 right-0 w-full flex justify-center z-40"
             >
-              <div className="flex flex-col items-center gap-2 animate-bounce">
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-gold-300/80 text-center pl-1">
+              <div className="flex flex-col items-center gap-2 animate-bounce bg-black/20 backdrop-blur-sm p-2 rounded-lg md:bg-transparent md:backdrop-blur-none">
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-gold-300/90 text-center pl-1 font-bold shadow-black drop-shadow-md">
                     Deslize para ver
                   </span>
-                  <ChevronDown size={28} strokeWidth={1} className="text-white/60" />
+                  <ChevronDown size={28} strokeWidth={1} className="text-white drop-shadow-md" />
               </div>
             </motion.div>
 
