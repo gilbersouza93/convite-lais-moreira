@@ -9,8 +9,17 @@ const Navigation: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      // Lógica alterada: Se passar de 50px, define como true.
+      // Não existe "else" para definir false, então ele nunca mais esconde
+      // até que a página seja atualizada.
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      }
     };
+
+    // Verifica já no carregamento caso a página inicie rolada
+    handleScroll();
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
