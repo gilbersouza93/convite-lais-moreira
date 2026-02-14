@@ -1,6 +1,6 @@
 import React from 'react';
 import { IMAGES } from '../constants';
-import { Download, Share2, ChevronRight } from 'lucide-react';
+import { Download, Share2, Stethoscope } from 'lucide-react';
 
 const CoverCard: React.FC = () => {
   const siteUrl = "https://convite-lais-moreira.vercel.app/";
@@ -14,8 +14,8 @@ const CoverCard: React.FC = () => {
       */}
       <div id="pdf-content" className="relative w-full max-w-[400px] aspect-[9/16] bg-[#0f0f0f] shadow-[0_0_60px_rgba(212,175,55,0.1)] overflow-hidden flex flex-col border border-gray-800 md:rounded-2xl">
         
-        {/* === PARTE SUPERIOR: FOTO (70% da altura) === */}
-        <div className="relative h-[68%] w-full overflow-hidden group">
+        {/* === PARTE SUPERIOR: FOTO (62% da altura) === */}
+        <div className="relative h-[62%] w-full overflow-hidden group">
             {/* Foto com Zoom suave ao passar o mouse (efeito apenas web) */}
             <img 
                 src={IMAGES.COVER_DISPLAY} 
@@ -51,8 +51,8 @@ const CoverCard: React.FC = () => {
                     
                     {/* Ícone/Texto do Selo */}
                     <div className="flex flex-col items-center justify-center text-gold-900 drop-shadow-sm">
-                        <span className="text-[10px] font-bold uppercase tracking-widest mb-0.5">Abrir</span>
-                        <ChevronRight size={24} strokeWidth={3} className="animate-pulse ml-0.5" />
+                        <Stethoscope size={24} strokeWidth={2.5} className="mb-0.5" />
+                        <span className="text-[10px] font-bold uppercase tracking-widest">Abrir</span>
                     </div>
 
                     {/* Brilho Animado no Selo */}
@@ -63,29 +63,33 @@ const CoverCard: React.FC = () => {
             </div>
         </div>
 
-        {/* === PARTE INFERIOR: TEXTO (30% da altura) === */}
-        <div className="relative h-[32%] bg-[#121212] flex flex-col items-center justify-center px-6 pt-8 pb-4 text-center">
+        {/* === PARTE INFERIOR: TEXTO (38% da altura) === */}
+        <div className="relative h-[38%] bg-[#121212] flex flex-col items-center justify-start px-6 pt-14 pb-4 text-center">
             {/* Textura de fundo sutil */}
             <div className="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
             
-            <p className="font-sans text-gold-500/80 text-[10px] uppercase tracking-[0.4em] mb-2">
+            <p className="font-sans text-gold-500/80 text-[10px] uppercase tracking-[0.4em] mb-2 z-10">
                 Convite Oficial
             </p>
 
-            <h1 className="font-script text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-100 to-gold-300 drop-shadow-sm mb-3 py-1 leading-none">
+            <h1 className="font-script text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-100 to-gold-300 drop-shadow-sm mb-4 py-1 leading-none z-10">
                 Dra. Laís Moreira
             </h1>
 
-            <div className="flex items-center gap-3 mb-4 opacity-80">
+            <div className="flex items-center gap-3 mb-4 opacity-80 z-10">
                 <div className="w-8 h-[1px] bg-gold-600"></div>
                 <h2 className="font-serif text-white text-sm tracking-[0.2em] uppercase">
                     Medicina • 2026
                 </h2>
                 <div className="w-8 h-[1px] bg-gold-600"></div>
             </div>
+            
+            <p className="font-serif text-gray-500 italic text-[10px] leading-relaxed max-w-[80%] mx-auto z-10">
+                "É com muita alegria que convido você para celebrar essa conquista comigo."
+            </p>
 
-            <p className="text-[9px] text-gray-500 uppercase tracking-widest mt-auto">
-                Clique no selo dourado para acessar
+            <p className="text-[9px] text-gray-600 uppercase tracking-widest mt-auto z-10">
+                Toque no selo para confirmar presença
             </p>
         </div>
 
