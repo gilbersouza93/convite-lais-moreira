@@ -7,7 +7,7 @@ import LoadingScreen from './components/LoadingScreen';
 import CoverCard from './components/CoverCard'; // Novo componente
 import { EVENTS, GALLERY_ITEMS, IMAGES } from './constants';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown, Heart } from 'lucide-react';
+import { ChevronDown, Heart, MessageCircle } from 'lucide-react';
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -183,7 +183,28 @@ const App: React.FC = () => {
                     >
                         "A medicina é a arte de preservar a vida e de aliviar o sofrimento. Chegar até aqui não foi apenas sobre estudar o corpo humano, mas sobre entender a alma humana."
                     </motion.p>
+                    
+                    {/* Linha Divisória */}
                     <div className="w-24 h-0.5 bg-gold-300 mx-auto mt-12"></div>
+
+                    {/* Botão de Confirmação Rápida */}
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.4 }}
+                        className="mt-10"
+                    >
+                        <a 
+                            href={whatsappLink} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-8 py-3 bg-gold-500 text-white font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-gold-600 transition-all duration-300 rounded-sm shadow-md hover:shadow-lg hover:-translate-y-0.5"
+                        >
+                            <MessageCircle size={16} />
+                            Confirmar Presença
+                        </a>
+                    </motion.div>
                 </div>
             </div>
         </section>
