@@ -6,6 +6,7 @@ const Navigation: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
+      // O menu aparecerá após rolar 50px
       setScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
@@ -14,7 +15,7 @@ const Navigation: React.FC = () => {
 
   const navLinks = [
     { name: 'Início', href: '#home' },
-    { name: 'Jornada', href: '#sobre' }, // Alterado de Biografia para Jornada
+    { name: 'Jornada', href: '#sobre' },
     { name: 'Solenidades', href: '#solenidades' },
     { name: 'Galeria', href: '#galeria' },
     { name: 'Presença', href: '#rsvp' },
@@ -35,8 +36,10 @@ const Navigation: React.FC = () => {
 
   return (
     <nav
-      className={`fixed w-full z-50 transition-all duration-500 border-b border-transparent ${
-        scrolled ? 'bg-dark-900/95 shadow-lg backdrop-blur-sm border-white/5 py-2' : 'bg-transparent py-3 md:py-6'
+      className={`fixed w-full z-50 transition-all duration-700 ease-in-out border-b border-transparent ${
+        scrolled 
+          ? 'translate-y-0 opacity-100 bg-dark-900/95 shadow-lg backdrop-blur-sm border-white/5 py-2' 
+          : '-translate-y-full opacity-0 pointer-events-none py-4'
       }`}
     >
       <div className="container mx-auto px-2 md:px-6 flex flex-col md:flex-row justify-between items-center gap-2 md:gap-0">
@@ -50,8 +53,8 @@ const Navigation: React.FC = () => {
           <img 
             src={IMAGES.LOGO} 
             alt="Logo LM" 
-            className={`logo-white-filter opacity-90 hover:opacity-100 transition-all duration-500 ${
-              scrolled ? 'h-8 md:h-14' : 'h-10 md:h-20'
+            className={`logo-white-filter hover:opacity-100 transition-all duration-500 ${
+              scrolled ? 'h-8 md:h-14 opacity-90' : 'h-12 md:h-20 opacity-0'
             }`}
           />
         </a>
