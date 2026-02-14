@@ -11,7 +11,8 @@ export const IMAGES = {
   FAITH: "https://i.postimg.cc/FKL2zS2X/1000173600.jpg",
   GALLERY_1: "https://i.postimg.cc/wBmSMNnC/1000173596.jpg",
   GALLERY_2: "https://i.postimg.cc/FKL2zS2t/1000173592.jpg",
-  GALLERY_3: "https://i.postimg.cc/fb96yd6s/1000173608.jpg"
+  GALLERY_3: "https://i.postimg.cc/fb96yd6s/1000173608.jpg",
+  COVER_DISPLAY: "https://i.postimg.cc/fb96yd6s/1000173608.jpg"
 };
 
 export const EVENTS: EventDetails[] = [
