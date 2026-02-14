@@ -14,8 +14,8 @@ const CoverCard: React.FC = () => {
       */}
       <div id="pdf-content" className="relative w-full max-w-[400px] aspect-[9/16] bg-[#0f0f0f] shadow-[0_0_60px_rgba(212,175,55,0.1)] overflow-hidden flex flex-col border border-gray-800 md:rounded-2xl">
         
-        {/* === PARTE SUPERIOR: FOTO (60% da altura) === */}
-        <div className="relative h-[60%] w-full overflow-hidden group">
+        {/* === PARTE SUPERIOR: FOTO (53% da altura - Reduzido para dar espaço ao texto) === */}
+        <div className="relative h-[53%] w-full overflow-hidden group">
             <img 
                 src={IMAGES.COVER_DISPLAY} 
                 alt="Dra Laís com Diploma" 
@@ -56,14 +56,14 @@ const CoverCard: React.FC = () => {
             </div>
         </div>
 
-        {/* === PARTE INFERIOR: TEXTO (40% da altura) === */}
-        <div className="relative h-[40%] bg-[#121212] flex flex-col px-6 pt-12 pb-8 text-center justify-between">
+        {/* === PARTE INFERIOR: TEXTO (47% da altura - Aumentado para caber tudo) === */}
+        <div className="relative h-[47%] bg-[#121212] flex flex-col px-6 pt-11 pb-5 text-center justify-between">
             <div className="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
             
-            {/* Aviso Explicito de Clique Logo Abaixo do Selo - COR RIGOROSAMENTE MAIS VISIVEL */}
-            <div className="relative z-10 -mt-2 mb-2 animate-pulse">
-                <p className="flex items-center justify-center gap-1 text-[11px] text-white font-bold uppercase tracking-widest drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
-                    <MousePointerClick size={14} className="text-gold-300" /> CLIQUE NO SELO PARA ABRIR
+            {/* Aviso Explicito de Clique Logo Abaixo do Selo */}
+            <div className="relative z-10 -mt-1 mb-1 animate-pulse">
+                <p className="flex items-center justify-center gap-1 text-[10px] text-white font-bold uppercase tracking-widest drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+                    <MousePointerClick size={12} className="text-gold-300" /> CLIQUE NO SELO PARA ABRIR
                 </p>
             </div>
 
@@ -73,12 +73,12 @@ const CoverCard: React.FC = () => {
                     Convite Oficial
                 </p>
 
-                {/* Padding aumentado (py-4) para não cortar o topo da fonte cursiva */}
-                <h1 className="font-script text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-100 to-gold-300 drop-shadow-sm mb-2 leading-relaxed py-4">
+                {/* Padding py-3 garante que a fonte cursiva não corte em cima ou embaixo */}
+                <h1 className="font-script text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-100 to-gold-300 drop-shadow-sm mb-1 leading-relaxed py-3">
                     Dra. Laís Moreira
                 </h1>
 
-                <div className="flex items-center gap-3 mb-3 opacity-80">
+                <div className="flex items-center gap-3 mb-2 opacity-80">
                     <div className="w-6 h-[1px] bg-gold-600"></div>
                     <h2 className="font-serif text-white text-xs tracking-[0.2em] uppercase">
                         Medicina • 2026
@@ -86,14 +86,14 @@ const CoverCard: React.FC = () => {
                     <div className="w-6 h-[1px] bg-gold-600"></div>
                 </div>
                 
-                <p className="font-serif text-gray-500 italic text-[11px] leading-relaxed max-w-[90%] mx-auto">
+                <p className="font-serif text-gray-500 italic text-[11px] leading-relaxed max-w-[95%] mx-auto mt-1">
                     "É com muita alegria que convido você para celebrar essa conquista comigo."
                 </p>
             </div>
 
-            {/* Rodapé com instrução final (Agora com margem segura) */}
-            <div className="relative z-10 mt-auto pt-4 border-t border-gray-800/50">
-                <p className="text-[10px] font-sans font-semibold text-gray-400 uppercase tracking-widest">
+            {/* Rodapé com instrução final */}
+            <div className="relative z-10 mt-1 pt-3 border-t border-gray-800/50">
+                <p className="text-[9px] font-sans font-semibold text-gray-400 uppercase tracking-widest">
                     Toque no selo dourado para acessar o site
                 </p>
             </div>
