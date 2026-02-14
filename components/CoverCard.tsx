@@ -53,7 +53,7 @@ const CoverCard: React.FC = () => {
       */}
       <div id="pdf-content" className="relative w-full max-w-[400px] aspect-[9/16] bg-[#0f0f0f] shadow-[0_0_60px_rgba(212,175,55,0.1)] overflow-hidden flex flex-col border border-gray-800 md:rounded-2xl print:border-none print:shadow-none print:rounded-none">
         
-        {/* === PARTE SUPERIOR: FOTO (53% da altura - Reduzido para dar espaço ao texto) === */}
+        {/* === PARTE SUPERIOR: FOTO (53% da altura) === */}
         <div className="relative h-[53%] w-full overflow-hidden group">
             <img 
                 src={IMAGES.COVER_DISPLAY} 
@@ -61,11 +61,8 @@ const CoverCard: React.FC = () => {
                 className="w-full h-full object-cover object-top"
             />
             
+            {/* Gradiente suave na base da foto para transição */}
             <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black/90 to-transparent"></div>
-
-            <div className="absolute top-6 left-0 w-full flex justify-center opacity-90 drop-shadow-md">
-                 <img src={IMAGES.LOGO} className="h-10 logo-white-filter" alt="Logo" />
-            </div>
         </div>
 
         {/* === DIVISÓRIA DOURADA & SELO === */}
@@ -95,7 +92,7 @@ const CoverCard: React.FC = () => {
             </div>
         </div>
 
-        {/* === PARTE INFERIOR: TEXTO (47% da altura - Aumentado para caber tudo) === */}
+        {/* === PARTE INFERIOR: TEXTO (47% da altura) === */}
         <div className="relative h-[47%] bg-[#121212] flex flex-col px-6 pt-11 pb-5 text-center justify-between">
             <div className="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
             
