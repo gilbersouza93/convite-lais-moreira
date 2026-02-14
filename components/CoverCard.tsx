@@ -60,10 +60,10 @@ const CoverCard: React.FC = () => {
         <div className="relative h-[40%] bg-[#121212] flex flex-col px-6 pt-12 pb-8 text-center justify-between">
             <div className="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
             
-            {/* Aviso Explicito de Clique Logo Abaixo do Selo */}
+            {/* Aviso Explicito de Clique Logo Abaixo do Selo - COR RIGOROSAMENTE MAIS VISIVEL */}
             <div className="relative z-10 -mt-2 mb-2 animate-pulse">
-                <p className="flex items-center justify-center gap-1 text-[11px] text-gold-200 font-bold uppercase tracking-widest drop-shadow-md">
-                    <MousePointerClick size={14} /> CLIQUE NO SELO PARA ABRIR
+                <p className="flex items-center justify-center gap-1 text-[11px] text-white font-bold uppercase tracking-widest drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+                    <MousePointerClick size={14} className="text-gold-300" /> CLIQUE NO SELO PARA ABRIR
                 </p>
             </div>
 
@@ -73,7 +73,8 @@ const CoverCard: React.FC = () => {
                     Convite Oficial
                 </p>
 
-                <h1 className="font-script text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-100 to-gold-300 drop-shadow-sm mb-2 leading-tight py-2">
+                {/* Padding aumentado (py-4) para não cortar o topo da fonte cursiva */}
+                <h1 className="font-script text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-100 to-gold-300 drop-shadow-sm mb-2 leading-relaxed py-4">
                     Dra. Laís Moreira
                 </h1>
 
