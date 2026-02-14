@@ -48,7 +48,8 @@ const App: React.FC = () => {
   const textY = useTransform(scrollY, [0, 800], [100, 0]); 
   const textScale = useTransform(scrollY, [0, 800], [0.9, 1]);
   const overlayOpacity = useTransform(scrollY, [0, 500], [0, 0.7]);
-  const arrowOpacity = useTransform(scrollY, [0, 150], [1, 0]);
+  // Aumentado o range de fade-out da seta para manter visível durante o scroll do hero
+  const arrowOpacity = useTransform(scrollY, [0, 600], [1, 0]);
 
   // Codificação segura da mensagem do WhatsApp
   const whatsappNumber = "5511956584146";

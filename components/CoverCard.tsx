@@ -62,8 +62,8 @@ const CoverCard: React.FC = () => {
             
             {/* Aviso Explicito de Clique Logo Abaixo do Selo */}
             <div className="relative z-10 -mt-2 mb-2 animate-pulse">
-                <p className="flex items-center justify-center gap-1 text-[10px] text-gold-400 font-bold uppercase tracking-widest">
-                    <MousePointerClick size={12} /> Clique no selo acima
+                <p className="flex items-center justify-center gap-1 text-[11px] text-gold-200 font-bold uppercase tracking-widest drop-shadow-md">
+                    <MousePointerClick size={14} /> CLIQUE NO SELO PARA ABRIR
                 </p>
             </div>
 
@@ -73,7 +73,7 @@ const CoverCard: React.FC = () => {
                     Convite Oficial
                 </p>
 
-                <h1 className="font-script text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-100 to-gold-300 drop-shadow-sm mb-2 leading-none">
+                <h1 className="font-script text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-100 to-gold-300 drop-shadow-sm mb-2 leading-tight py-2">
                     Dra. Laís Moreira
                 </h1>
 
