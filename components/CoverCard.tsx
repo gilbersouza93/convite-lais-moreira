@@ -10,33 +10,38 @@ const CoverCard: React.FC = () => {
       
       {/* 
          CSS Específico para Impressão (PDF)
+         - Define tamanho exato 9:16 (108mm x 192mm)
          - Remove margens padrão
-         - Força o conteúdo a ocupar 100% da folha
-         - Ajusta cores de fundo
+         - Força o conteúdo a ocupar 100% da área definida
       */}
       <style>{`
         @media print {
-            @page { margin: 0; size: auto; }
-            body { 
+            @page { 
+                margin: 0; 
+                size: 108mm 192mm; /* Proporção exata Mobile (9:16) */
+            }
+            html, body { 
                 margin: 0; 
                 padding: 0; 
+                width: 108mm !important;
+                height: 192mm !important;
                 background-color: #0f0f0f !important;
                 -webkit-print-color-adjust: exact !important; 
                 print-color-adjust: exact !important; 
+                overflow: hidden !important;
             }
             /* Esconde cabeçalho e rodapé padrão do navegador se aparecerem */
             header, footer { display: none !important; }
             
-            /* Força o card a preencher tudo */
+            /* Força o card a preencher tudo exatamente */
             #pdf-content {
                 position: fixed !important;
                 top: 0 !important;
                 left: 0 !important;
-                right: 0 !important;
-                bottom: 0 !important;
-                width: 100vw !important;
-                height: 100vh !important;
+                width: 108mm !important;
+                height: 192mm !important;
                 max-width: none !important;
+                max-height: none !important;
                 aspect-ratio: auto !important;
                 border: none !important;
                 border-radius: 0 !important;
