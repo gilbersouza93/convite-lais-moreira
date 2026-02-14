@@ -4,10 +4,10 @@ import Countdown from './components/Countdown';
 import EventCard from './components/EventCard';
 import GallerySection from './components/GallerySection';
 import LoadingScreen from './components/LoadingScreen';
-import CoverCard from './components/CoverCard'; // Novo componente
+import CoverCard from './components/CoverCard';
 import { EVENTS, GALLERY_ITEMS, IMAGES } from './constants';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown, Heart, MessageCircle } from 'lucide-react';
+import { ChevronDown, Heart } from 'lucide-react';
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -27,7 +27,7 @@ const App: React.FC = () => {
   }, [familyImages.length]);
   // --------------------------------------
 
-  // Ref para efeito parallax da seção família (removido uso direto, mantido para estrutura se necessário futuro)
+  // Ref para efeito parallax da seção família
   const familyRef = useRef(null);
 
   // Verifica se estamos no modo "Gerador de Capa" (PDF)
@@ -48,9 +48,6 @@ const App: React.FC = () => {
   const textY = useTransform(scrollY, [0, 800], [100, 0]); 
   const textScale = useTransform(scrollY, [0, 800], [0.9, 1]);
   const overlayOpacity = useTransform(scrollY, [0, 500], [0, 0.7]);
-  
-  // Aumentado drasticamente o range da seta para manter visível enquanto a foto estiver na tela
-  // [0, 1000, 1500] -> Mantém opacidade 1 até 1000px, e some totalmente em 1500px
   const arrowOpacity = useTransform(scrollY, [0, 1000, 1500], [1, 1, 0]);
 
   // Codificação segura da mensagem do WhatsApp
@@ -72,9 +69,7 @@ const App: React.FC = () => {
       <div className={`min-h-screen ${loading ? 'overflow-hidden h-screen' : ''}`}>
         <Navigation />
 
-        {/* 
-            Hero Section Wrapper com altura aumentada para 250vh.
-        */}
+        {/* Hero Section Wrapper */}
         <header id="home" className="relative h-[250vh]">
           
           {/* Sticky Container */}
@@ -137,7 +132,6 @@ const App: React.FC = () => {
                <img 
                  src={IMAGES.HERO_PORTRAIT} 
                  alt="Dra. Laís Moreira" 
-                 // Aumentado h- de 65vh para 70vh no mobile para preencher o gap superior
                  className="relative z-10 w-auto h-[70vh] md:h-[85vh] object-contain object-bottom max-w-none md:max-w-full drop-shadow-[0_10px_50px_rgba(0,0,0,0.9)]"
                />
             </motion.div>
@@ -148,7 +142,6 @@ const App: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 4, duration: 1 }}
-              // Alterado de bottom-8 para bottom-24 (mobile) e bottom-8 (desktop)
               className="absolute bottom-24 md:bottom-8 left-0 right-0 w-full flex justify-center z-40"
             >
               <div className="flex flex-col items-center gap-2 animate-bounce bg-black/20 backdrop-blur-sm p-2 rounded-lg md:bg-transparent md:backdrop-blur-none">
@@ -187,7 +180,7 @@ const App: React.FC = () => {
                     {/* Linha Divisória */}
                     <div className="w-24 h-0.5 bg-gold-300 mx-auto mt-12"></div>
 
-                    {/* Botão de Confirmação Rápida */}
+                    {/* Botão de Confirmação Rápida - Estilo unificado com o rodapé */}
                     <motion.div 
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -199,9 +192,8 @@ const App: React.FC = () => {
                             href={whatsappLink} 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-8 py-3 bg-gold-500 text-white font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-gold-600 transition-all duration-300 rounded-sm shadow-md hover:shadow-lg hover:-translate-y-0.5"
+                            className="inline-block px-8 py-3 bg-gold-500 text-white font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-gold-600 transition-all duration-300 rounded-sm shadow-md hover:shadow-lg hover:-translate-y-0.5"
                         >
-                            <MessageCircle size={16} />
                             Confirmar Presença
                         </a>
                     </motion.div>
@@ -238,6 +230,7 @@ const App: React.FC = () => {
                         viewport={{ once: true }}
                         className="w-full md:w-1/2 text-center md:text-left pt-4"
                     >
+                        {/* Subtítulo ajustado para A Jornada */}
                         <h3 className="text-gold-500 font-sans text-sm tracking-[0.2em] uppercase font-bold mb-4">A Jornada</h3>
                         <h2 className="font-serif text-5xl md:text-6xl text-gray-800 mb-8">Dra. Laís Moreira</h2>
                         <div className="space-y-6 text-gray-600 text-lg font-light leading-relaxed">
@@ -254,7 +247,7 @@ const App: React.FC = () => {
             </div>
         </section>
 
-        {/* Family Section - REDESIGN EDITORIAL + CARROSSEL */}
+        {/* Family Section */}
         <section ref={familyRef} className="relative py-24 bg-dark-900 overflow-hidden">
             {/* Elementos de Fundo */}
             <div className="absolute inset-0 pointer-events-none">
@@ -265,7 +258,6 @@ const App: React.FC = () => {
             <div className="container mx-auto px-6 relative z-10">
                 <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
                     
-                    {/* Coluna de Texto (Esquerda no Desktop, Topo no Mobile) */}
                     <motion.div 
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -289,7 +281,6 @@ const App: React.FC = () => {
                             </p>
                         </blockquote>
 
-                        {/* Botões do Carrossel (Antigas bolinhas decorativas) */}
                         <div className="mt-8 flex justify-center md:justify-end gap-3">
                              {familyImages.map((_, idx) => (
                                 <button
@@ -306,7 +297,6 @@ const App: React.FC = () => {
                         </div>
                     </motion.div>
 
-                    {/* Coluna da Imagem com Crossfade (Direita no Desktop, Meio no Mobile) */}
                     <motion.div 
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
@@ -330,7 +320,6 @@ const App: React.FC = () => {
                                         className="absolute inset-0 w-full h-full object-cover"
                                     />
                                 </AnimatePresence>
-                                {/* Brilho sutil sobre a foto */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 z-10 pointer-events-none"></div>
                              </div>
                         </div>
@@ -396,7 +385,8 @@ const App: React.FC = () => {
         <section id="solenidades" className="py-24 bg-white">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-16">
-                    <h3 className="text-gold-500 font-sans text-sm tracking-[0.3em] uppercase font-bold mb-3">Agenda</h3>
+                    {/* Subtítulo ajustado */}
+                    <h3 className="text-gold-500 font-sans text-sm tracking-[0.3em] uppercase font-bold mb-3">Cronograma</h3>
                     <h2 className="font-serif text-4xl md:text-5xl text-gray-800">Solenidades</h2>
                     <div className="w-24 h-1 bg-gold-500 mx-auto mt-6"></div>
                 </div>
