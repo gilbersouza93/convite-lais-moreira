@@ -5,6 +5,7 @@ import EventCard from './components/EventCard';
 import GallerySection from './components/GallerySection';
 import LoadingScreen from './components/LoadingScreen';
 import CoverCard from './components/CoverCard';
+import ParticleBackground from './components/ParticleBackground';
 import { EVENTS, GALLERY_ITEMS, IMAGES } from './constants';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown, Heart } from 'lucide-react';
@@ -75,8 +76,8 @@ const App: React.FC = () => {
           {/* Sticky Container */}
           <div className="sticky top-0 h-screen flex flex-col items-center justify-start pt-20 md:justify-center md:pt-0 overflow-hidden bg-[#0a0a0a]">
             
-            {/* Background Effects */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {/* 1. Background Estático (Fundo Original) - Z-Index 0 */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-[#111] to-black opacity-90"></div>
                <div className="absolute inset-0 opacity-[0.03]" 
                     style={{ 
@@ -84,7 +85,10 @@ const App: React.FC = () => {
                         backgroundSize: '4rem 4rem' 
                     }}>
                </div>
+               {/* Mancha de Luz Central Original */}
                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/3 w-[150vw] md:w-[60vw] h-[60vh] bg-gold-500/10 rounded-full blur-[100px] opacity-50 mix-blend-screen"></div>
+               
+               {/* LM Gigante */}
                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center items-center select-none z-0">
                   <span className="font-serif text-[40vh] md:text-[60vh] text-gold-300 opacity-[0.06] leading-none tracking-tighter">
                     LM
@@ -93,13 +97,17 @@ const App: React.FC = () => {
                <div className="absolute inset-0 opacity-30" style={{ backgroundImage: 'radial-gradient(circle at center, white 1px, transparent 1px)', backgroundSize: '50px 50px' }}></div>
             </div>
 
-            {/* Dark Overlay */}
+            {/* 2. Camada de Partículas e Poeira Dourada (NOVO) - Z-Index 10 */}
+            {/* Esta camada fica SOBRE o fundo estático, mas SOB a imagem da formanda */}
+            <ParticleBackground opacity={1} />
+
+            {/* 3. Dark Overlay (Para legibilidade do texto) - Z-Index 20 */}
             <motion.div 
                 style={{ opacity: overlayOpacity }}
                 className="absolute inset-0 bg-black/85 z-20 pointer-events-none transition-colors duration-75"
             />
 
-            {/* Main Content Text */}
+            {/* 4. Texto Principal - Z-Index 30 */}
             <motion.div 
               style={{ opacity: textOpacity, y: textY, scale: textScale }}
               className="relative z-30 text-center text-white px-4 max-w-5xl mx-auto mb-auto md:mb-0 mt-8 md:mt-0"
@@ -120,29 +128,30 @@ const App: React.FC = () => {
               </h2>
             </motion.div>
 
-            {/* The Graduate Image */}
+            {/* 5. Imagem da Formanda - Z-Index 40 (Frente das partículas) */}
             <motion.div 
               initial={{ opacity: 0, y: 100 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.5, duration: 1.5, ease: "easeOut" }}
-              className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-center pointer-events-none"
+              className="absolute inset-x-0 bottom-0 z-40 flex items-end justify-center pointer-events-none"
             >
-               <div className="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-black via-black/40 to-transparent z-20"></div>
+               {/* Sombra base para integrar a foto ao chão */}
+               <div className="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-black via-black/40 to-transparent z-40"></div>
                
                <img 
                  src={IMAGES.HERO_PORTRAIT} 
                  alt="Dra. Laís Moreira" 
-                 className="relative z-10 w-auto h-[70vh] md:h-[85vh] object-contain object-bottom max-w-none md:max-w-full drop-shadow-[0_10px_50px_rgba(0,0,0,0.9)]"
+                 className="relative z-50 w-auto h-[70vh] md:h-[85vh] object-contain object-bottom max-w-none md:max-w-full drop-shadow-[0_10px_50px_rgba(0,0,0,0.9)]"
                />
             </motion.div>
 
-            {/* Scroll Down Indicator */}
+            {/* 6. Indicador de Scroll - Z-Index 50 */}
             <motion.div 
               style={{ opacity: arrowOpacity }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 4, duration: 1 }}
-              className="absolute bottom-24 md:bottom-8 left-0 right-0 w-full flex justify-center z-40"
+              className="absolute bottom-24 md:bottom-8 left-0 right-0 w-full flex justify-center z-50"
             >
               <div className="flex flex-col items-center gap-2 animate-bounce bg-black/20 backdrop-blur-sm p-2 rounded-lg md:bg-transparent md:backdrop-blur-none">
                   <span className="text-[10px] uppercase tracking-[0.3em] text-gold-300/90 text-center pl-1 font-bold shadow-black drop-shadow-md">
@@ -249,12 +258,9 @@ const App: React.FC = () => {
 
         {/* Family Section */}
         <section ref={familyRef} className="relative py-24 bg-dark-900 overflow-hidden">
-            {/* Elementos de Fundo */}
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 right-0 w-3/4 h-3/4 bg-gold-500/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4"></div>
-                <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gold-900/10 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4"></div>
-            </div>
-
+            {/* NOVO BACKGROUND ANIMADO (Reutilizado aqui também) */}
+            <ParticleBackground opacity={0.6} />
+            
             <div className="container mx-auto px-6 relative z-10">
                 <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
                     
@@ -406,6 +412,9 @@ const App: React.FC = () => {
         {/* RSVP Section */}
         <section id="rsvp" className="py-24 bg-dark-900 text-white text-center relative overflow-hidden">
             <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-full bg-gold-500/5 radial-gradient"></div>
+
+            {/* Reutilizando Partículas aqui também para manter o tema */}
+            <ParticleBackground opacity={0.7} />
 
             <div className="container mx-auto px-6 relative z-10">
                 <motion.div
