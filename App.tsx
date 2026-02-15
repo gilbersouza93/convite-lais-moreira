@@ -97,20 +97,40 @@ const App: React.FC = () => {
                <div className="absolute inset-0 opacity-30" style={{ backgroundImage: 'radial-gradient(circle at center, white 1px, transparent 1px)', backgroundSize: '50px 50px' }}></div>
             </div>
 
-            {/* 2. Camada de Partículas e Poeira Dourada (NOVO) - Z-Index 10 */}
-            {/* Esta camada fica SOBRE o fundo estático, mas SOB a imagem da formanda */}
+            {/* 2. Camada de Partículas - Z-Index 10 */}
             <ParticleBackground opacity={1} />
 
-            {/* 3. Dark Overlay (Para legibilidade do texto) - Z-Index 20 */}
+            {/* 3. Imagem da Formanda - Z-Index 20 (MOVIDO PARA CÁ) */}
+            {/* Agora ela fica ATRÁS do overlay (que é z-30) e do texto (z-40) */}
+            <motion.div 
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5, duration: 1.5, ease: "easeOut" }}
+              className="absolute inset-x-0 bottom-0 z-20 flex items-end justify-center pointer-events-none"
+            >
+               {/* Sombra base para integrar a foto ao chão */}
+               <div className="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-black via-black/40 to-transparent z-20"></div>
+               
+               <img 
+                 src={IMAGES.HERO_PORTRAIT} 
+                 alt="Dra. Laís Moreira" 
+                 // Adicionado brightness-90 e contrast-105 para reduzir o estouro do branco e melhorar a definição
+                 className="relative z-20 w-auto h-[70vh] md:h-[85vh] object-contain object-bottom max-w-none md:max-w-full drop-shadow-[0_10px_50px_rgba(0,0,0,0.9)] brightness-90 contrast-105"
+               />
+            </motion.div>
+
+            {/* 4. Dark Overlay - Z-Index 30 */}
+            {/* Escurece tudo que está abaixo dele (Imagem, Particulas, Fundo) */}
             <motion.div 
                 style={{ opacity: overlayOpacity }}
-                className="absolute inset-0 bg-black/85 z-20 pointer-events-none transition-colors duration-75"
+                className="absolute inset-0 bg-black/85 z-30 pointer-events-none transition-colors duration-75"
             />
 
-            {/* 4. Texto Principal - Z-Index 30 */}
+            {/* 5. Texto Principal - Z-Index 40 */}
+            {/* Fica ACIMA do Overlay, garantindo legibilidade perfeita */}
             <motion.div 
               style={{ opacity: textOpacity, y: textY, scale: textScale }}
-              className="relative z-30 text-center text-white px-4 max-w-5xl mx-auto mb-auto md:mb-0 mt-8 md:mt-0"
+              className="relative z-40 text-center text-white px-4 max-w-5xl mx-auto mb-auto md:mb-0 mt-8 md:mt-0"
             >
               <p className="font-sans text-xs md:text-lg tracking-[0.3em] uppercase mb-2 md:mb-6 text-gold-300 drop-shadow-lg font-medium">
                 Convite de Formatura
@@ -128,23 +148,6 @@ const App: React.FC = () => {
               </h2>
             </motion.div>
 
-            {/* 5. Imagem da Formanda - Z-Index 40 (Frente das partículas) */}
-            <motion.div 
-              initial={{ opacity: 0, y: 100 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.5, duration: 1.5, ease: "easeOut" }}
-              className="absolute inset-x-0 bottom-0 z-40 flex items-end justify-center pointer-events-none"
-            >
-               {/* Sombra base para integrar a foto ao chão */}
-               <div className="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-black via-black/40 to-transparent z-40"></div>
-               
-               <img 
-                 src={IMAGES.HERO_PORTRAIT} 
-                 alt="Dra. Laís Moreira" 
-                 className="relative z-50 w-auto h-[70vh] md:h-[85vh] object-contain object-bottom max-w-none md:max-w-full drop-shadow-[0_10px_50px_rgba(0,0,0,0.9)]"
-               />
-            </motion.div>
-
             {/* 6. Indicador de Scroll - Z-Index 50 */}
             <motion.div 
               style={{ opacity: arrowOpacity }}
@@ -153,7 +156,8 @@ const App: React.FC = () => {
               transition={{ delay: 4, duration: 1 }}
               className="absolute bottom-24 md:bottom-8 left-0 right-0 w-full flex justify-center z-50"
             >
-              <div className="flex flex-col items-center gap-2 animate-bounce bg-black/20 backdrop-blur-sm p-2 rounded-lg md:bg-transparent md:backdrop-blur-none">
+              {/* Removido o bg-transparent do MD para manter o fundo escuro sempre e garantir leitura sobre o jaleco */}
+              <div className="flex flex-col items-center gap-2 animate-bounce bg-black/40 backdrop-blur-md p-3 rounded-xl border border-white/5 shadow-lg">
                   <span className="text-[10px] uppercase tracking-[0.3em] text-gold-300/90 text-center pl-1 font-bold shadow-black drop-shadow-md">
                     Deslize para ver
                   </span>
