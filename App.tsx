@@ -44,12 +44,13 @@ const App: React.FC = () => {
     }
   }, []);
 
-  // AJUSTES DE SCROLL (Apenas para o App Principal):
-  const textOpacity = useTransform(scrollY, [0, 200, 800], [0, 0, 1]); 
-  const textY = useTransform(scrollY, [0, 800], [100, 0]); 
-  const textScale = useTransform(scrollY, [0, 800], [0.9, 1]);
-  const overlayOpacity = useTransform(scrollY, [0, 500], [0, 0.7]);
-  const arrowOpacity = useTransform(scrollY, [0, 1000, 1500], [1, 1, 0]);
+  // AJUSTES DE SCROLL OTIMIZADOS:
+  // Reduzi o range máximo de 800 para 600 para acompanhar a altura menor da seção
+  const textOpacity = useTransform(scrollY, [0, 200, 600], [0, 0, 1]); 
+  const textY = useTransform(scrollY, [0, 600], [100, 0]); 
+  const textScale = useTransform(scrollY, [0, 600], [0.9, 1]);
+  const overlayOpacity = useTransform(scrollY, [0, 400], [0, 0.7]);
+  const arrowOpacity = useTransform(scrollY, [0, 300, 500], [1, 0, 0]);
 
   // Codificação segura da mensagem do WhatsApp
   const whatsappNumber = "5511956584146";
@@ -70,14 +71,15 @@ const App: React.FC = () => {
       <div className={`min-h-screen ${loading ? 'overflow-hidden h-screen' : ''}`}>
         <Navigation />
 
-        {/* Hero Section Wrapper */}
-        <header id="home" className="relative h-[250vh]">
+        {/* Hero Section Wrapper - Altura Reduzida de 250vh para 180vh para melhor performance */}
+        <header id="home" className="relative h-[180vh]">
           
           {/* Sticky Container */}
           <div className="sticky top-0 h-screen flex flex-col items-center justify-start pt-20 md:justify-center md:pt-0 overflow-hidden bg-[#0a0a0a]">
             
             {/* 1. Background Estático (Fundo Original) - Z-Index 0 */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+            {/* Adicionado transform-gpu para forçar layer de composição */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
                <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-[#111] to-black opacity-90"></div>
                <div className="absolute inset-0 opacity-[0.03]" 
                     style={{ 
@@ -86,11 +88,11 @@ const App: React.FC = () => {
                     }}>
                </div>
                {/* Mancha de Luz Central Original */}
-               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/3 w-[150vw] md:w-[60vw] h-[60vh] bg-gold-500/10 rounded-full blur-[100px] opacity-50 mix-blend-screen"></div>
+               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/3 w-[150vw] md:w-[60vw] h-[60vh] bg-gold-500/10 rounded-full blur-[80px] opacity-50 mix-blend-screen will-change-transform"></div>
                
                {/* LM Gigante */}
                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center items-center select-none z-0">
-                  <span className="font-serif text-[40vh] md:text-[60vh] text-gold-300 opacity-[0.06] leading-none tracking-tighter">
+                  <span className="font-serif text-[40vh] md:text-[60vh] text-gold-300 opacity-[0.06] leading-none tracking-tighter will-change-transform">
                     LM
                   </span>
                </div>
@@ -106,7 +108,7 @@ const App: React.FC = () => {
               initial={{ opacity: 0, y: 100 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.5, duration: 1.5, ease: "easeOut" }}
-              className="absolute inset-x-0 bottom-0 z-20 flex items-end justify-center pointer-events-none"
+              className="absolute inset-x-0 bottom-0 z-20 flex items-end justify-center pointer-events-none will-change-transform"
             >
                {/* Sombra base para integrar a foto ao chão */}
                <div className="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-black via-black/40 to-transparent z-20"></div>
@@ -114,8 +116,8 @@ const App: React.FC = () => {
                <img 
                  src={IMAGES.HERO_PORTRAIT} 
                  alt="Dra. Laís Moreira" 
-                 // Adicionado brightness-90 e contrast-105 para reduzir o estouro do branco e melhorar a definição
-                 className="relative z-20 w-auto h-[70vh] md:h-[85vh] object-contain object-bottom max-w-none md:max-w-full drop-shadow-[0_10px_50px_rgba(0,0,0,0.9)] brightness-90 contrast-105"
+                 // Adicionado transform-gpu e will-change-transform
+                 className="relative z-20 w-auto h-[70vh] md:h-[85vh] object-contain object-bottom max-w-none md:max-w-full drop-shadow-[0_10px_50px_rgba(0,0,0,0.9)] brightness-90 contrast-105 transform-gpu"
                />
             </motion.div>
 
@@ -123,14 +125,14 @@ const App: React.FC = () => {
             {/* Escurece tudo que está abaixo dele (Imagem, Particulas, Fundo) */}
             <motion.div 
                 style={{ opacity: overlayOpacity }}
-                className="absolute inset-0 bg-black/85 z-30 pointer-events-none transition-colors duration-75"
+                className="absolute inset-0 bg-black/85 z-30 pointer-events-none transition-colors duration-75 will-change-[opacity]"
             />
 
             {/* 5. Texto Principal - Z-Index 40 */}
             {/* Fica ACIMA do Overlay, garantindo legibilidade perfeita */}
             <motion.div 
               style={{ opacity: textOpacity, y: textY, scale: textScale }}
-              className="relative z-40 text-center text-white px-4 max-w-5xl mx-auto mb-auto md:mb-0 mt-8 md:mt-0"
+              className="relative z-40 text-center text-white px-4 max-w-5xl mx-auto mb-auto md:mb-0 mt-8 md:mt-0 will-change-transform"
             >
               <p className="font-sans text-xs md:text-lg tracking-[0.3em] uppercase mb-2 md:mb-6 text-gold-300 drop-shadow-lg font-medium">
                 Convite de Formatura
@@ -154,7 +156,7 @@ const App: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 4, duration: 1 }}
-              className="absolute bottom-24 md:bottom-8 left-0 right-0 w-full flex justify-center z-50"
+              className="absolute bottom-24 md:bottom-8 left-0 right-0 w-full flex justify-center z-50 will-change-[opacity]"
             >
               {/* Removido o bg-transparent do MD para manter o fundo escuro sempre e garantir leitura sobre o jaleco */}
               <div className="flex flex-col items-center gap-2 animate-bounce bg-black/40 backdrop-blur-md p-3 rounded-xl border border-white/5 shadow-lg">
