@@ -415,10 +415,10 @@ const App: React.FC = () => {
 
         {/* RSVP Section */}
         <section id="rsvp" className="py-24 bg-dark-900 text-white text-center relative overflow-hidden">
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-full bg-gold-500/5 radial-gradient"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-dark-900 via-transparent to-black opacity-80 pointer-events-none"></div>
 
-            {/* Reutilizando Partículas aqui também para manter o tema */}
-            <ParticleBackground opacity={0.7} />
+            {/* Reutilizando Partículas com opacidade reduzida para evitar excesso de amarelo */}
+            <ParticleBackground opacity={0.4} />
 
             <div className="container mx-auto px-6 relative z-10">
                 <motion.div
