@@ -9,8 +9,9 @@ export const IMAGES = {
   FAMILY_BG: "https://i.postimg.cc/N0HWFXWw/1000173584.jpg",
   FAMILY_2: "https://i.postimg.cc/MTJgQT8L/familia.jpg",
   FAITH: "https://i.postimg.cc/FKL2zS2X/1000173600.jpg",
+  REFLECTION: "https://i.postimg.cc/FKL2zS2t/1000173592.jpg", // Foto solene movida para cá
   GALLERY_1: "https://i.postimg.cc/wBmSMNnC/1000173596.jpg",
-  GALLERY_2: "https://i.postimg.cc/FKL2zS2t/1000173592.jpg",
+  GALLERY_2: "https://i.postimg.cc/CL8ycfJH/12341.jpg", // Nova foto com as amigas
   GALLERY_3: "https://i.postimg.cc/fb96yd6s/1000173608.jpg",
   COVER_DISPLAY: "https://i.postimg.cc/fb96yd6s/1000173608.jpg"
 };
