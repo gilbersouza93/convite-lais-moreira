@@ -155,7 +155,7 @@ const App: React.FC = () => {
               style={{ opacity: arrowOpacity }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 4, duration: 1 }}
+              transition={{ delay: 2.5, duration: 1 }}
               className="absolute bottom-24 md:bottom-8 left-0 right-0 w-full flex justify-center z-50 will-change-[opacity]"
             >
               {/* Removido o bg-transparent do MD para manter o fundo escuro sempre e garantir leitura sobre o jaleco */}
